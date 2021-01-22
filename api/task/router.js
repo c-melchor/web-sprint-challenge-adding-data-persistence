@@ -3,9 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const tasks = await Tasks.getAll();
   try {
-    res.status(200).json(tasks);
+    const getTasks = await Tasks.getAll();
+    res.status(200).json(getTasks);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
