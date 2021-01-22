@@ -11,11 +11,13 @@ router.get("/", async (req, res) => {
     res.status(500).json({ errorMessage: error.message });
   }
 });
-// router.post("/", async (req, res) => {
-//   try {
-//   } catch (error) {
-//     res.status(500).json({ errorMessage: error.message });
-//   }
-// });
+router.post("/", async (req, res) => {
+  try {
+    const newProject = await Projects.insert(req.body);
+    res.status(201).json(newProject);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
+  }
+});
 
 module.exports = router;
