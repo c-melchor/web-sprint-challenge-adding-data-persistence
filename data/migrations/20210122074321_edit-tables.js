@@ -31,11 +31,26 @@ exports.up = function(knex) {
         .notNullable()
         .unique();
       tbl.string("resource_description", 1000);
+    })
+    .createTable("project_resources", tbl => {
+      tbl
+        .integer("resource_id")
+        .notNullable()
+        .references("resource_id")
+        .inTable("resources")
+        .onDelete("CASCADE");
+      tbl
+        .integer("project_id")
+        .notNullable()
+        .references("project_id")
+        .inTable("projects")
+        .onDelete("CASCADE");
     });
 };
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists("project_resources")
     .dropTableIfExists("resources")
     .dropTableIfExists("tasks")
     .dropTableIfExists("projects");
