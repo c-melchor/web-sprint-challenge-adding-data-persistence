@@ -12,4 +12,13 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const newTask = await Tasks.insert(req.body);
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
+  }
+});
+
 module.exports = router;
