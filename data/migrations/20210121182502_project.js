@@ -21,7 +21,8 @@ exports.up = function(knex) {
         .integer("project_id")
         .notNullable()
         .references("project_id")
-        .inTable("projects");
+        .inTable("projects")
+        .onDelete("RESTRICT");
     });
 };
 
